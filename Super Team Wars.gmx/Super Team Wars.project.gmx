@@ -10,6 +10,7 @@
     <sprite>sprites\MASK_TempBuilding</sprite>
     <sprite>sprites\TempBuilding</sprite>
     <sprite>sprites\RoadTile</sprite>
+    <sprite>sprites\Select_Temp_Character</sprite>
     <sprite>sprites\Temp_Character</sprite>
   </sprites>
   <backgrounds name="background"/>
@@ -18,6 +19,8 @@
     <object>objects\ObjConcrete</object>
     <object>objects\ObjRoad</object>
     <object>objects\ObjTempBuilding</object>
+    <object>objects\ObjLoad</object>
+    <object>objects\ObjTempUnit</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TestRoom</room>
