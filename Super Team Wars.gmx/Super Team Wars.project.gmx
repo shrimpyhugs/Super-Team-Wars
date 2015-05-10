@@ -6,10 +6,10 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\MASK_TempBuilding</sprite>
     <sprite>sprites\TempBuilding</sprite>
     <sprite>sprites\Select_Temp_Character</sprite>
     <sprite>sprites\Temp_Character</sprite>
+    <sprite>sprites\Obj_TempStructure</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\Bck_FloorTiles</background>
@@ -21,7 +21,9 @@
   <objects name="objects">
     <object>objects\ObjTempBuilding</object>
     <object>objects\ObjLoad</object>
-    <object>objects\ObjTempUnit</object>
+    <object>objects\Obj_Hero</object>
+    <object>objects\Obj_Minion</object>
+    <object>objects\Obj_Structure</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TestRoom</room>
