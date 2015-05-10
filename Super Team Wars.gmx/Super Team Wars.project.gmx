@@ -6,27 +6,22 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\Concrete_Tile</sprite>
-    <sprite>sprites\Grass_Tile</sprite>
     <sprite>sprites\MASK_TempBuilding</sprite>
     <sprite>sprites\TempBuilding</sprite>
-    <sprite>sprites\Road_Tile</sprite>
-    <sprite>sprites\RoadMidD_Tile</sprite>
-    <sprite>sprites\RoadMidU_Tile</sprite>
     <sprite>sprites\Select_Temp_Character</sprite>
     <sprite>sprites\Temp_Character</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\Bck_FloorTiles</background>
+  </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\Scr_ObjectHide.gml</script>
+  </scripts>
   <objects name="objects">
-    <object>objects\ObjConcrete</object>
-    <object>objects\ObjRoad</object>
     <object>objects\ObjTempBuilding</object>
     <object>objects\ObjLoad</object>
     <object>objects\ObjTempUnit</object>
-    <object>objects\ObjRoadMidU</object>
-    <object>objects\ObjRoadMidD</object>
-    <object>objects\ObjGrass</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TestRoom</room>

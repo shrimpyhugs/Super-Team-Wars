@@ -31,16 +31,16 @@ ys = window_mouse_get_y(); //get mouse location Y
 margin = 30 //margin area for scrolling
 
 if(xs &lt;= margin) { //if the mouse is on the left of screen
-view_xview[0] -= 5 //move the view to the left
+view_xview[0] -= 10 //move the view to the left
 }
 else if(xs &gt;= (room_width - margin)) { //if the mouse is on the right of screen
-view_xview[0] += 5 //move the view to the right
+view_xview[0] += 10 //move the view to the right
 }
 if(ys &lt;= margin) { //if the mouse is at the top of the screen
-view_yview[0] -= 5 //move the view up
+view_yview[0] -= 10 //move the view up
 }
 else if(ys &gt;= (room_height - margin)){ //if the mouse is at the bottom of the screen
-view_yview[0] += 5 //move the view down
+view_yview[0] += 10 //move the view down
 }
 </string>
           </argument>
