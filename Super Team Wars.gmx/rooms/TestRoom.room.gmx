@@ -52,9 +52,12 @@
   </views>
   <instances>
     <instance objName="self" x="160" y="176" name="inst_7B4B2E00" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="ObjLoad" x="0" y="0" name="inst_2FDAA41D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="ObjTempBuilding" x="288" y="128" name="inst_7FB407DF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="ObjTempBuilding" x="480" y="-64" name="inst_DBDCC576" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Obj_Load" x="0" y="0" name="inst_2FDAA41D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Obj_Temp_Building" x="288" y="128" name="inst_7FB407DF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Obj_Temp_Building" x="480" y="-64" name="inst_DBDCC576" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Obj_Minion" x="320" y="480" name="inst_79C45E43" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Obj_Minion" x="448" y="416" name="inst_20E04653" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Obj_Selection" x="32" y="0" name="inst_8A9D8D3A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="Bck_FloorTiles" x="96" y="80" w="64" h="32" xo="0" yo="0" id="10000001" name="inst_9C5D7D1D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
