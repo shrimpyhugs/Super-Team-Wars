@@ -26,9 +26,21 @@
           <argument>
             <kind>1</kind>
             <string>global.Groups[0,0] = 0
-global.LastGroup = 0
+global.UsedGroups[0] = 1
+for (i=1;i&lt;=20;i+=1)
+{
+    global.UsedGroups[i] = 0
+}
+
+SelectedGroup = 0
+
+TotalX = 0
+TotalY = 0
 
 MouseDown = false
+
+globalvar NotTrue;
+NotTrue = false
 </string>
           </argument>
         </arguments>
@@ -51,11 +63,56 @@ MouseDown = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for (i=1;i&lt;=global.Groups[0,0];i+=1)
+            <string>///This Is An Awesome Title.
+if global.Groups[0,0] &gt; 3 and SelectedGroup = 0
 {
-    ID = global.Groups[0,i]
-    ID.MoveX = mouse_x
-    ID.MoveY = mouse_y
+    //Select the group array to use.
+    for (i=1;i&lt;=20;i+=1)
+    {
+        if global.UsedGroups[i] = 0 {SelectedGroup = i}
+    }
+    if i &gt;= 20
+    {
+        SelectedGroup = global.UsedGroups[0]
+        if global.UsedGroups[0] &lt;= 20 {global.UsedGroups[0] += 1}
+        else {global.UsedGroups[0] = 1}
+    }
+    
+    //Transfer to selected 'Permanent' Group.
+    for (i=1;i&lt;=global.Groups[0,0];i+=1) {global.Groups[SelectedGroup,i+2] = global.Groups[0,i]}
+}
+
+if NotTrue              //Clicked On Enemy.
+{
+}
+else if NotTrue         //Dragged Over Enemies.
+{
+}
+else if NotTrue = false //Click On Location.
+{
+    if global.Groups[SelectedGroup,0] &lt;= 3
+    {
+        for (i=3;i&lt;=global.Groups[SelectedGroup,0];i+=1)
+        {
+            ID = global.Groups[SelectedGroup,i]
+            ID.MoveX = mouse_x
+            ID.MoveY = mouse_y
+        }
+    }
+    else
+    {
+        for (i=3;i&lt;=global.Groups[SelectedGroup,0];i+=1)
+        {
+            ID = global.Groups[SelectedGroup,i]
+            TotalX += ID.x
+            TotalY += ID.y
+            ID.MoveX = mouse_x
+            ID.MoveY = mouse_y
+        }
+    }
+}
+else if NotTrue         //Drag Over Location.
+{
 }
 </string>
           </argument>
@@ -110,12 +167,17 @@ MouseDown = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = mouse_x
-y = mouse_y
-
-global.Groups[0,0] = 0
-
-MouseDown = true
+            <string>
+//if mouse_x &gt; view_xview /* + GUI left menu width*/ and mouse_y &gt; view_yview /* + GUI top menu width*/ and mouse_y &gt; view_yview + view_hview /* - GUI bottom menu width*/
+//{
+    x = mouse_x
+    y = mouse_y
+    
+    global.Groups[0,0] = 0
+    SelectedGroup = 0
+    
+    MouseDown = true
+//}
 </string>
           </argument>
         </arguments>
