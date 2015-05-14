@@ -58,6 +58,7 @@
     <instance objName="Obj_Minion" x="320" y="480" name="inst_79C45E43" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Obj_Minion" x="448" y="416" name="inst_20E04653" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Obj_Selection" x="32" y="0" name="inst_8A9D8D3A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_ButtonStance" x="512" y="480" name="inst_70C11147" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="Bck_FloorTiles" x="96" y="80" w="64" h="32" xo="0" yo="0" id="10000001" name="inst_9C5D7D1D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

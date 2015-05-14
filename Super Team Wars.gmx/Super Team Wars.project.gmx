@@ -11,6 +11,7 @@
     <sprite>sprites\spr_Temp_Character</sprite>
     <sprite>sprites\spr_Temp_Structure</sprite>
     <sprite>sprites\spr_Selection_Box</sprite>
+    <sprite>sprites\spr_Stance</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\Bck_FloorTiles</background>
@@ -26,6 +27,7 @@
     <object>objects\Obj_Minion</object>
     <object>objects\Obj_Structure</object>
     <object>objects\Obj_Selection</object>
+    <object>objects\obj_ButtonStance</object>
     <objects name="Parents">
       <object>objects\P_All_Units</object>
       <object>objects\P_Friendly</object>
