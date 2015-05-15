@@ -35,7 +35,7 @@
     <object>objects\Obj_Structure</object>
     <object>objects\Obj_Selection</object>
     <objects name="GUI">
-      <object>objects\obj_Button_Stance</object>
+      <object>objects\Obj_Button_Stance</object>
       <object>objects\Obj_Button_Pairing</object>
     </objects>
     <objects name="Parents">

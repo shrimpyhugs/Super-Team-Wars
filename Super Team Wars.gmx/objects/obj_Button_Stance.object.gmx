@@ -26,6 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>//Set Sprite
+x = 0
+y = 0
 image_speed = 0 //makes it not toggle on its own
 </string>
           </argument>

@@ -64,7 +64,7 @@ view_yview[0] += 10 //move the view down
         <arguments>
           <argument>
             <kind>10</kind>
-            <object>obj_Button_Stance</object>
+            <object>Obj_Button_Stance</object>
           </argument>
           <argument>
             <kind>0</kind>
