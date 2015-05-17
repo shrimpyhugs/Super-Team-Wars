@@ -26,6 +26,7 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\Scr_ObjectHide.gml</script>
+    <script>scripts\Notes.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\Obj_Temp_Building</object>
@@ -42,8 +43,11 @@
       <object>objects\P_All_Units</object>
       <object>objects\P_Friendly</object>
       <object>objects\P_Enemy</object>
+      <object>objects\P_Terrain</object>
+      <object>objects\P_Obstacles</object>
     </objects>
     <object>objects\object11</object>
+    <object>objects\Obj_PathFinding_Controller</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\TestRoom</room>

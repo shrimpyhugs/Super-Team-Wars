@@ -42,6 +42,12 @@ Selected = false
 sprite_index = MySprite
 MoveX = x
 MoveY = y
+TempX = x
+TempY = y
+
+notMoving = 0
+
+Path = path_add()
 
 </string>
           </argument>
@@ -83,17 +89,33 @@ MoveY = y
     }
 }
 
-if MoveX != x or MoveY != y
+
+TempX = x
+TempY = y
+if (MoveX &gt;= x + sprite_width + 11 or MoveX &lt;= x - 11) or (MoveY &gt;= y + sprite_height + 16 or MoveY &lt;= y - 16)
 {
+    
+    mp_potential_step_object(MoveX, MoveY, 5, P_Obstacles)
+    
+    /*
     for (i=0;i&lt;=4;i+=1)
     {
-        if x &lt; MoveX {x += 1}
-        else if x &gt; MoveX {x -= 1}
+        if TempX &lt; MoveX        {TempX += 1}
+        else if TempX &gt; MoveX   {TempX -= 1}
         
-        if y &lt; MoveY {y += 1}
-        else if y &gt; MoveY {y -= 1}
+        if TempY &lt; MoveY        {TempY += 1}
+        else if TempY &gt; MoveY   {TempY -= 1}
     }
+    */
 }
+
+/*
+if place_meeting(TempX,TempY,P_All_Units)
+{
+    x = TempX
+    y = TempY
+}
+*/
 </string>
           </argument>
         </arguments>
