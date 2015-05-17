@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="3" enumb="2">
+    <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,29 +25,37 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>xs = window_mouse_get_x(); //get mouse location X
-ys = window_mouse_get_y(); //get mouse location Y
-
-margin = 30 //margin area for scrolling
-
-if(xs &lt;= margin) { //if the mouse is on the left of screen
-view_xview[0] -= 10 //move the view to the left
-}
-else if(xs &gt;= (room_width - margin)) { //if the mouse is on the right of screen
-view_xview[0] += 10 //move the view to the right
-}
-if(ys &lt;= margin) { //if the mouse is at the top of the screen
-view_yview[0] -= 10 //move the view up
-}
-else if(ys &gt;= (room_height - margin)){ //if the mouse is at the bottom of the screen
-view_yview[0] += 10 //move the view down
-}
+            <string>xs = 0
+ys = 0
+nothing = 0
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>611</id>
+        <kind>6</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>nothing</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>201</id>
@@ -101,6 +109,49 @@ view_yview[0] += 10 //move the view down
           <argument>
             <kind>0</kind>
             <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Code Title.
+xs = window_mouse_get_x(); //get mouse location X
+ys = window_mouse_get_y(); //get mouse location Y
+
+margin = 30 //margin area for scrolling
+
+if (xs &lt;= margin or keyboard_check(vk_left)) and view_xview[0] &gt; -30 { //if the mouse is on the left of screen
+view_xview[0] -= 10 //move the view to the left
+}
+else if(xs &gt;= (view_wview[0] - margin) or keyboard_check(vk_right)) and (view_xview[0] + view_wview[0] &lt; room_width + 30) { //if the mouse is on the right of screen
+view_xview[0] += 10 //move the view to the right
+}
+
+if(ys &lt;= margin or keyboard_check(vk_up)) and view_yview[0] &gt; -30 { //if the mouse is at the top of the screen
+view_yview[0] -= 10 //move the view up
+}
+else if(ys &gt;= (view_hview[0] - margin) or keyboard_check(vk_down)) and (view_yview[0] + view_hview[0] &lt; room_height + 30) { //if the mouse is at the bottom of the screen
+view_yview[0] += 10 //move the view down
+}
+
+
+</string>
           </argument>
         </arguments>
       </action>
