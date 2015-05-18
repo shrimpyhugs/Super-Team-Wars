@@ -27,6 +27,7 @@
   <scripts name="scripts">
     <script>scripts\Scr_ObjectHide.gml</script>
     <script>scripts\Notes.gml</script>
+    <script>scripts\scr_Become_Selected.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\Obj_Temp_Building</object>

@@ -3,7 +3,7 @@
   <spriteName>spr_Selection_Box</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-10</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -31,6 +31,8 @@ for (i=1;i&lt;=20;i+=1)
 {
     global.UsedGroups[i] = 0
 }
+
+image_alpha = 0
 
 SelectedGroup = 0
 
@@ -64,12 +66,17 @@ NotTrue = false
           <argument>
             <kind>1</kind>
             <string>///This Is An Awesome Title.
+
+
+
+
+/*
 if global.Groups[0,0] &gt; 3 and SelectedGroup = 0
 {
     //Select the group array to use.
     for (i=1;i&lt;=20;i+=1)
     {
-        if global.UsedGroups[i] = 0 {SelectedGroup = i}
+        if global.UsedGroups[i] = 0 {SelectedGroup = i; global.UsedGroups[i] = 1}
     }
     if i &gt;= 20
     {
@@ -79,9 +86,16 @@ if global.Groups[0,0] &gt; 3 and SelectedGroup = 0
     }
     
     //Transfer to selected 'Permanent' Group.
-    for (i=1;i&lt;=global.Groups[0,0];i+=1) {global.Groups[SelectedGroup,i+2] = global.Groups[0,i]}
+    for (i=1;i&lt;=global.Groups[0,0];i+=1)
+    {
+        global.Groups[SelectedGroup,i+2] = global.Groups[0,i]
+        global.Groups[SelectedGroup,0] += 1
+    }
 }
+*/
 
+
+/*
 if NotTrue              //Clicked On Enemy.
 {
 }
@@ -90,15 +104,17 @@ else if NotTrue         //Dragged Over Enemies.
 }
 else if NotTrue = false //Click On Location.
 {
-    if global.Groups[SelectedGroup,0] &lt;= 3
-    {
-        for (i=3;i&lt;=global.Groups[SelectedGroup,0];i+=1)
+*/
+    //if global.Groups[SelectedGroup,0] &lt;= 3
+    //{
+        for (i=1;i&lt;=global.Groups[SelectedGroup,0];i+=1)
         {
             ID = global.Groups[SelectedGroup,i]
             ID.MoveX = mouse_x
             ID.MoveY = mouse_y
         }
-    }
+    //}
+    /*
     else
     {
         for (i=3;i&lt;=global.Groups[SelectedGroup,0];i+=1)
@@ -110,10 +126,14 @@ else if NotTrue = false //Click On Location.
             ID.MoveY = mouse_y
         }
     }
+    */
+/*
 }
 else if NotTrue         //Drag Over Location.
 {
 }
+*/
+
 </string>
           </argument>
         </arguments>
@@ -136,13 +156,29 @@ else if NotTrue         //Drag Over Location.
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>with(P_Friendly)
+            <string>keyboard_check(vk_control)
+
+if mouse_x &lt; x + 1 or mouse_x &gt; x - 1 or mouse_y &lt; y + 1 or mouse_x &gt; y - 1
 {
-checkSelected = true
+    if keyboard_check(vk_control)
+    {
+        ID = collision_point(x,y,P_All_Units,1,1)
+        ID.SelectAction = 1
+    }
+    else
+    {
+    
+    }
+}
+else
+{
+    with(P_Friendly)
+    {
+        checkSelected = true
+    }
 }
 
 image_alpha = 0
-
 
 MouseDown = false
 </string>
@@ -151,6 +187,38 @@ MouseDown = false
       </action>
     </event>
     <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>542</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_sprite_transform</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>(mouse_x-x)/10</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>(mouse_y-y)/10</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>0</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -386,7 +454,7 @@ MouseDown = false
           </argument>
           <argument>
             <kind>0</kind>
-            <string>1</string>
+            <string>0.5</string>
           </argument>
         </arguments>
       </action>
@@ -431,6 +499,85 @@ MouseDown = false
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+    </event>
+    <event eventtype="10" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///This Is An Awesome Title.
+if global.Groups[0,0] &gt; 3 and SelectedGroup = 0
+{
+    //Select the group array to use.
+    for (i=1;i&lt;=20;i+=1)
+    {
+        if global.UsedGroups[i] = 0 {SelectedGroup = i; global.UsedGroups[i] = 1}
+    }
+    if i &gt;= 20
+    {
+        SelectedGroup = global.UsedGroups[0]
+        if global.UsedGroups[0] &lt;= 20 {global.UsedGroups[0] += 1}
+        else {global.UsedGroups[0] = 1}
+    }
+    
+    //Transfer to selected 'Permanent' Group.
+    for (i=1;i&lt;=global.Groups[0,0];i+=1) {global.Groups[SelectedGroup,i+2] = global.Groups[0,i]}
+}
+
+
+/*
+if NotTrue              //Clicked On Enemy.
+{
+}
+else if NotTrue         //Dragged Over Enemies.
+{
+}
+else if NotTrue = false //Click On Location.
+{
+*/
+    if global.Groups[SelectedGroup,0] &lt;= 3
+    {
+        for (i=3;i&lt;=global.Groups[SelectedGroup,0];i+=1)
+        {
+            ID = global.Groups[SelectedGroup,i]
+            ID.MoveX = mouse_x
+            ID.MoveY = mouse_y
+        }
+    }
+    else
+    {
+        for (i=3;i&lt;=global.Groups[SelectedGroup,0];i+=1)
+        {
+            ID = global.Groups[SelectedGroup,i]
+            TotalX += ID.x
+            TotalY += ID.y
+            ID.MoveX = mouse_x
+            ID.MoveY = mouse_y
+        }
+    }
+/*
+}
+else if NotTrue         //Drag Over Location.
+{
+}
+*/
+
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
   </events>

@@ -37,7 +37,7 @@ Pairing = 0 //pairing setting of Minion
 MySprite = spr_Temp_Character
 SpriteSl = spr_Selected_Temp_Character
 
-checkSelected = false
+SelectAction = 0
 Selected = false
 sprite_index = MySprite
 MoveX = x
@@ -71,23 +71,62 @@ Path = path_add()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if checkSelected = true
+            <string>if SelectAction &gt; 0 //Perform Selection Actions
 {
-    checkSelected = false
-    if collision_point(x,y,Obj_Selection,0,0) or collision_point(x+32,y,Obj_Selection,0,0) or collision_point(x,y+32,Obj_Selection,0,0) or collision_point(x+32,y+32,Obj_Selection,0,0)
+    if SelectAction = 1 //L-Click       = Become selected as individual.
     {
-        Selected = true
-        sprite_index = SpriteSl
-        global.Groups[0,0] += 1
-        MyNumber = global.Groups[0,0]
-        global.Groups[0,MyNumber] = id
+        if Selected  = false
+        {
+            Selected = true
+            sprite_index = SpriteSl
+            global.Groups[0,0] = 1
+            MyNumber = 1
+            global.Groups[0,1] = id
+        }
+        else
+        {
+            Selected = false
+            sprite_index = MySprite
+        }
     }
-    else
+    if SelectAction = 2 //L-Click+Drag  = Check if in selection box, and add to group.
     {
-        Selected = false
-        sprite_index = MySprite
+        if collision_point(x,y,Obj_Selection,0,0) or collision_point(x+sprite_width,y,Obj_Selection,0,0) or collision_point(x,y+sprite_height,Obj_Selection,0,0) or collision_point(x+sprite_width,y+sprite_height,Obj_Selection,0,0) or becomeSelected = true
+        {
+            Selected = true
+            sprite_index = SpriteSl
+            global.Groups[0,0] += 1
+            MyNumber = global.Groups[0,0]
+            global.Groups[0,MyNumber] = id
+        }
+        else
+        {
+            Selected = false
+            sprite_index = MySprite
+        }
     }
+    if SelectAction = 3 //Ctrl+L-Click  = If selected, become deselected, otherwise add to group.
+    {
+        if Selected  = false
+        {
+            Selected = true
+            sprite_index = SpriteSl
+            global.Groups[0,0] += 1
+            MyNumber = global.Groups[0,0]
+            global.Groups[0,MyNumber] = id
+        }
+        else
+        {
+            Selected = false
+            sprite_index = MySprite
+        }
+    }
+    if SelectAction = 4 //R-Click       = Replace the attack group with this unit.
+    {}
+    if SelectAction = 5 //R-Click+Drag  = Add this unit to the attack group. also
+    {}
 }
+
 
 
 TempX = x

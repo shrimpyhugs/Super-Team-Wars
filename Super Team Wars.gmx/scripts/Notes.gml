@@ -19,5 +19,13 @@ Plan For PathFinding:
 
 
 
-*/
+Selection
+SelectAction = 1 //L-Click       = Become selected as individual.
+SelectAction = 2 //L-Click+Drag  = Check if in selection box, and add to group.
+SelectAction = 3 //Ctrl+L-Click  = If selected, become deselected, otherwise add to group.
+SelectAction = 4 //R-Click       = Replace the attack group with this unit.
+SelectAction = 5 //R-Click+Drag  = Add this unit to the attack group. also
 
+
+
+*/
