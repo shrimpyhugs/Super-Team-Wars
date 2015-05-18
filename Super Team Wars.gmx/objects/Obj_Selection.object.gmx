@@ -43,150 +43,43 @@ MouseDown = false
 
 globalvar NotTrue;
 NotTrue = false
+
+global.SelectionPositions[0] = 0
+global.SelectionPositions[1] = 0
+global.SelectionPositions[2] = 0
+global.SelectionPositions[3] = 0
 </string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="6" enumb="57">
       <action>
         <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
+        <id>612</id>
+        <kind>0</kind>
         <userelative>0</userelative>
-        <isquestion>0</isquestion>
+        <isquestion>-1</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
+        <exetype>1</exetype>
+        <functionname>action_if_variable</functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
-            <kind>1</kind>
-            <string>///This Is An Awesome Title.
-
-
-
-
-/*
-if global.Groups[0,0] &gt; 3 and SelectedGroup = 0
-{
-    //Select the group array to use.
-    for (i=1;i&lt;=20;i+=1)
-    {
-        if global.UsedGroups[i] = 0 {SelectedGroup = i; global.UsedGroups[i] = 1}
-    }
-    if i &gt;= 20
-    {
-        SelectedGroup = global.UsedGroups[0]
-        if global.UsedGroups[0] &lt;= 20 {global.UsedGroups[0] += 1}
-        else {global.UsedGroups[0] = 1}
-    }
-    
-    //Transfer to selected 'Permanent' Group.
-    for (i=1;i&lt;=global.Groups[0,0];i+=1)
-    {
-        global.Groups[SelectedGroup,i+2] = global.Groups[0,i]
-        global.Groups[SelectedGroup,0] += 1
-    }
-}
-*/
-
-
-/*
-if NotTrue              //Clicked On Enemy.
-{
-}
-else if NotTrue         //Dragged Over Enemies.
-{
-}
-else if NotTrue = false //Click On Location.
-{
-*/
-    //if global.Groups[SelectedGroup,0] &lt;= 3
-    //{
-        for (i=1;i&lt;=global.Groups[SelectedGroup,0];i+=1)
-        {
-            ID = global.Groups[SelectedGroup,i]
-            ID.MoveX = mouse_x
-            ID.MoveY = mouse_y
-        }
-    //}
-    /*
-    else
-    {
-        for (i=3;i&lt;=global.Groups[SelectedGroup,0];i+=1)
-        {
-            ID = global.Groups[SelectedGroup,i]
-            TotalX += ID.x
-            TotalY += ID.y
-            ID.MoveX = mouse_x
-            ID.MoveY = mouse_y
-        }
-    }
-    */
-/*
-}
-else if NotTrue         //Drag Over Location.
-{
-}
-*/
-
-</string>
+            <kind>0</kind>
+            <string>id</string>
           </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="56">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
           <argument>
-            <kind>1</kind>
-            <string>keyboard_check(vk_control)
-
-if mouse_x &lt; x + 1 or mouse_x &gt; x - 1 or mouse_y &lt; y + 1 or mouse_x &gt; y - 1
-{
-    if keyboard_check(vk_control)
-    {
-        ID = collision_point(x,y,P_All_Units,1,1)
-        ID.SelectAction = 1
-    }
-    else
-    {
-    
-    }
-}
-else
-{
-    with(P_Friendly)
-    {
-        checkSelected = true
-    }
-}
-
-image_alpha = 0
-
-MouseDown = false
-</string>
+            <kind>0</kind>
+            <string>0</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="6" enumb="53">
       <action>
         <libid>1</libid>
         <id>542</id>
@@ -219,6 +112,8 @@ MouseDown = false
           </argument>
         </arguments>
       </action>
+    </event>
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -236,272 +131,177 @@ MouseDown = false
           <argument>
             <kind>1</kind>
             <string>
+
+if mouse_check_button_pressed(mb_left)
+{
 //if mouse_x &gt; view_xview /* + GUI left menu width*/ and mouse_y &gt; view_yview /* + GUI top menu width*/ and mouse_y &gt; view_yview + view_hview /* - GUI bottom menu width*/
 //{
-    x = mouse_x
-    y = mouse_y
+    global.SelectionPositions[0] = mouse_x
+    global.SelectionPositions[1] = mouse_y
+    global.SelectionPositions[2] = mouse_x
+    global.SelectionPositions[3] = mouse_y
     
-    global.Groups[0,0] = 0
-    SelectedGroup = 0
+    if not keyboard_check(vk_control)
+    {
+        global.Groups[0,0] = 0
+        SelectedGroup = 0
+    }
     
     MouseDown = true
 //}
+}
+if mouse_check_button(mb_left)
+{
+    if MouseDown
+    {
+        global.SelectionPositions[2] = mouse_x
+        global.SelectionPositions[3] = mouse_y
+    }
+}
+if mouse_check_button_released(mb_left)
+{
+    nothing = 1
+    if global.SelectionPositions[0] &gt; global.SelectionPositions[2]
+    {
+        transfer = global.SelectionPositions[0]
+        global.SelectionPositions[0] = global.SelectionPositions[2]
+        global.SelectionPositions[2] = transfer
+    }
+    if global.SelectionPositions[1] &gt; global.SelectionPositions[3]
+    {
+        transfer = global.SelectionPositions[1]
+        global.SelectionPositions[1] = global.SelectionPositions[3]
+        global.SelectionPositions[3] = transfer
+    }
+    
+    if (global.SelectionPositions[0] = global.SelectionPositions[2]) and (global.SelectionPositions[1] = global.SelectionPositions[3])
+    {
+        ID = collision_point(global.SelectionPositions[0],global.SelectionPositions[1],P_All_Units,1,1)
+        if ID
+        {
+            if not keyboard_check(vk_control)
+            {
+                with(P_All_Units)
+                {
+                    SelectAction = 6
+                }
+                ID.SelectAction = 1
+            }
+            else
+            {
+                ID.SelectAction = 3
+            }
+        }
+        else {with(P_All_Units) {SelectAction = 6}}
+    }
+    else
+    {
+        if keyboard_check(vk_control)
+        {
+            with(P_All_Units) {SelectAction = 2}
+            for (i=1;i&lt;=global.Groups[0,0];i+=1)
+            {
+                ID = global.Groups[0,0]
+                ID.SelectAction = 1
+            }
+            global.Groups[0,0] = 0
+        }
+        else
+        {
+            global.Group[0,0] = 0
+            with(P_All_Units) {SelectAction = 2}
+        }
+    }
+    
+    image_alpha = 0
+    
+    MouseDown = false
+}
+else if not mouse_check_button(mb_left)
+{
+    global.SelectionPositions[0] = 0
+    global.SelectionPositions[1] = 0
+    global.SelectionPositions[2] = 0
+    global.SelectionPositions[3] = 0
+}
+
+
+
+if mouse_check_button_released(mb_right)
+{
+    /*
+    if global.Groups[0,0] &gt; 3 and SelectedGroup = 0
+    {
+        //Select the group array to use.
+        for (i=1;i&lt;=20;i+=1)
+        {
+            if global.UsedGroups[i] = 0 {SelectedGroup = i; global.UsedGroups[i] = 1}
+        }
+        if i &gt;= 20
+        {
+            SelectedGroup = global.UsedGroups[0]
+            if global.UsedGroups[0] &lt;= 20 {global.UsedGroups[0] += 1}
+            else {global.UsedGroups[0] = 1}
+        }
+        
+        //Transfer to selected 'Permanent' Group.
+        for (i=1;i&lt;=global.Groups[0,0];i+=1)
+        {
+            global.Groups[SelectedGroup,i+2] = global.Groups[0,i]
+            global.Groups[SelectedGroup,0] += 1
+        }
+    }
+    */
+    
+    
+    /*
+    if NotTrue              //Clicked On Enemy.
+    {
+    }
+    else if NotTrue         //Dragged Over Enemies.
+    {
+    }
+    else if NotTrue = false //Click On Location.
+    {
+    */
+        //if global.Groups[SelectedGroup,0] &lt;= 3
+        //{
+            for (i=1;i&lt;=global.Groups[SelectedGroup,0];i+=1)
+            {
+                ID = global.Groups[SelectedGroup,i]
+                if ID != noone
+                {
+                    ID.MoveX = mouse_x
+                    ID.MoveY = mouse_y
+                }
+            }
+        //}
+        /*
+        else
+        {
+            for (i=3;i&lt;=global.Groups[SelectedGroup,0];i+=1)
+            {
+                ID = global.Groups[SelectedGroup,i]
+                TotalX += ID.x
+                TotalY += ID.y
+                ID.MoveX = mouse_x
+                ID.MoveY = mouse_y
+            }
+        }
+        */
+    /*
+    }
+    else if NotTrue         //Drag Over Location.
+    {
+    }
+    */
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="50">
-      <action>
-        <libid>1</libid>
-        <id>612</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>-1</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_if_variable</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>MouseDown</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>1</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>422</id>
-        <kind>1</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>611</id>
-        <kind>6</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>image_alpha</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>612</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>-1</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_if_variable</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>-1</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>x</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>mouse_x</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>422</id>
-        <kind>1</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>612</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>-1</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_if_variable</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>-1</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>y</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>mouse_y</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>422</id>
-        <kind>1</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>542</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_sprite_transform</functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>0</kind>
-            <string>(mouse_x-x)/10</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>(mouse_y-y)/10</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>0</string>
-          </argument>
-          <argument>
-            <kind>4</kind>
-            <string>0</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>611</id>
-        <kind>6</kind>
-        <userelative>-1</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>image_alpha</string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string>0.5</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>424</id>
-        <kind>2</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>424</id>
-        <kind>2</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>424</id>
-        <kind>2</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-      </action>
-    </event>
-    <event eventtype="10" enumb="13">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -518,63 +318,24 @@ MouseDown = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///This Is An Awesome Title.
-if global.Groups[0,0] &gt; 3 and SelectedGroup = 0
+            <string>if mouse_check_button(mb_left)
 {
-    //Select the group array to use.
-    for (i=1;i&lt;=20;i+=1)
-    {
-        if global.UsedGroups[i] = 0 {SelectedGroup = i; global.UsedGroups[i] = 1}
-    }
-    if i &gt;= 20
-    {
-        SelectedGroup = global.UsedGroups[0]
-        if global.UsedGroups[0] &lt;= 20 {global.UsedGroups[0] += 1}
-        else {global.UsedGroups[0] = 1}
-    }
-    
-    //Transfer to selected 'Permanent' Group.
-    for (i=1;i&lt;=global.Groups[0,0];i+=1) {global.Groups[SelectedGroup,i+2] = global.Groups[0,i]}
+    draw_set_alpha(0.5)
+    draw_set_colour(c_aqua)
+    draw_rectangle(global.SelectionPositions[0],global.SelectionPositions[1],global.SelectionPositions[2],global.SelectionPositions[3],0)
+    draw_rectangle(global.SelectionPositions[0],global.SelectionPositions[1],global.SelectionPositions[2],global.SelectionPositions[3],1)
+    draw_set_alpha(1)
+    draw_set_colour(c_white)
 }
-
-
-/*
-if NotTrue              //Clicked On Enemy.
+if mouse_check_button(mb_right)
 {
+    draw_set_alpha(0.5)
+    draw_set_colour(c_red)
+    draw_rectangle(global.SelectionPositions[0],global.SelectionPositions[1],global.SelectionPositions[2],global.SelectionPositions[3],0)
+    draw_rectangle(global.SelectionPositions[0],global.SelectionPositions[1],global.SelectionPositions[2],global.SelectionPositions[3],1)
+    draw_set_alpha(1)
+    draw_set_colour(c_white)
 }
-else if NotTrue         //Dragged Over Enemies.
-{
-}
-else if NotTrue = false //Click On Location.
-{
-*/
-    if global.Groups[SelectedGroup,0] &lt;= 3
-    {
-        for (i=3;i&lt;=global.Groups[SelectedGroup,0];i+=1)
-        {
-            ID = global.Groups[SelectedGroup,i]
-            ID.MoveX = mouse_x
-            ID.MoveY = mouse_y
-        }
-    }
-    else
-    {
-        for (i=3;i&lt;=global.Groups[SelectedGroup,0];i+=1)
-        {
-            ID = global.Groups[SelectedGroup,i]
-            TotalX += ID.x
-            TotalY += ID.y
-            ID.MoveX = mouse_x
-            ID.MoveY = mouse_y
-        }
-    }
-/*
-}
-else if NotTrue         //Drag Over Location.
-{
-}
-*/
-
 </string>
           </argument>
         </arguments>
