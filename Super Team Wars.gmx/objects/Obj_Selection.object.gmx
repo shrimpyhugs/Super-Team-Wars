@@ -130,7 +130,7 @@ global.SelectionPositions[3] = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>if !(global.on_gui) {  //if not above the GUI
 
 if mouse_check_button_pressed(mb_left)
 {
@@ -295,6 +295,7 @@ if mouse_check_button_released(mb_right)
     {
     }
     */
+}
 }
 </string>
           </argument>

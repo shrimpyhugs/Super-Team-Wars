@@ -53,18 +53,20 @@ image_speed = 0 //makes it not toggle on its own
             <kind>1</kind>
             <string>var CurrentStance = image_index //gets the current button stance
 
-if(image_index != 2){ //if the stance isnt the last 
-image_index = image_index + 1;
-}
-else { //if it is the last
-image_index = 0
-}
 
-with (P_Friendly) { //for all friendly units
-    if(Selected = true){ //if the unit is selected
-    Stance = CurrentStance //makes the unit stance the Current Stance on the button
+    if(image_index != 2){ //if the stance isnt the last 
+        image_index = image_index + 1;
     }
-}
+    else { //if it is the last
+        image_index = 0
+    }
+
+    with (P_Friendly) { //for all friendly units
+        if(Selected = true){ //if the unit is selected
+            Stance = CurrentStance //makes the unit stance the Current Stance on the button
+        }
+    }
+
 </string>
           </argument>
         </arguments>

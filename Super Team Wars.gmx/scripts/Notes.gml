@@ -28,4 +28,13 @@ SelectAction = 5 //R-Click+Drag  = Add this unit to the attack group.
 SelectAction = 6 //L-Click Ground= Deselect
 
 
+*************GUI NOTES******************
+X create "gui zone" which changes on_gui variable for selection stuffs
+- create buttons
+- Load Buttons in through code (not placed in room)
+- buttons working
+*****************************************
+
+
+
 */

@@ -71,7 +71,8 @@ Path = path_add()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if SelectAction &gt; 0 //Perform Selection Actions
+            <string>if !(global.on_gui)
+if SelectAction &gt; 0 //Perform Selection Actions
 {
     if SelectAction = 1 //L-Click       = Become selected as individual or just add to group.
     {

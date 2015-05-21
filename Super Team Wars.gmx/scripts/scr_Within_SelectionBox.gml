@@ -32,4 +32,3 @@ if X + Width > global.SelectionPositions[0] and X + Width < global.SelectionPosi
 }
 
 return false
-
