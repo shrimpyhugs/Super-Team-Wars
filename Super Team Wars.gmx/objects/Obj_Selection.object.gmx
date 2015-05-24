@@ -161,7 +161,7 @@ if mouse_check_button(mb_left)
 if mouse_check_button_released(mb_left)
 {
     nothing = 1
-    if global.SelectionPositions[0] &gt; global.SelectionPositions[2]
+    if global.SelectionPositions[0] &gt; global.SelectionPositions[2] //Flip the selection box if it is inverted.
     {
         transfer = global.SelectionPositions[0]
         global.SelectionPositions[0] = global.SelectionPositions[2]
@@ -175,7 +175,7 @@ if mouse_check_button_released(mb_left)
     }
     
     if (global.SelectionPositions[0] = global.SelectionPositions[2]) and (global.SelectionPositions[1] = global.SelectionPositions[3])
-    {
+    { //If mouse was pressed and released in the same position (click not drag).
         ID = collision_point(global.SelectionPositions[0],global.SelectionPositions[1],P_All_Units,1,1)
         if ID
         {
@@ -198,13 +198,13 @@ if mouse_check_button_released(mb_left)
     {
         if keyboard_check(vk_control)
         {
-            with(P_All_Units) {SelectAction = 2}
-            for (i=1;i&lt;=global.Groups[0,0];i+=1)
+            with(P_All_Units) {SelectAction = 4}
+            /*for (i=1;i&lt;=global.Groups[0,0];i+=1)
             {
                 ID = global.Groups[0,0]
                 ID.SelectAction = 1
             }
-            global.Groups[0,0] = 0
+            global.Groups[0,0] = 0*/
         }
         else
         {
@@ -273,6 +273,8 @@ if mouse_check_button_released(mb_right)
                 {
                     ID.MoveX = mouse_x
                     ID.MoveY = mouse_y
+                    ID.TargetNumber = 0
+                    ID.TargetReached = false
                 }
             }
         //}

@@ -37,13 +37,16 @@ Pairing = 0 //pairing setting of Minion
 MySprite = spr_Temp_Character
 SpriteSl = spr_Selected_Temp_Character
 
+MyNumber = 0
+MyGroup = 0
+
 SelectAction = 0
 Selected = false
 sprite_index = MySprite
 MoveX = x
 MoveY = y
-TempX = x
-TempY = y
+TargetNumber = 0
+TargetReached = false
 
 notMoving = 0
 
@@ -76,19 +79,19 @@ if SelectAction &gt; 0 //Perform Selection Actions
 {
     if SelectAction = 1 //L-Click       = Become selected as individual or just add to group.
     {
-        if Selected  = false
-        {
+        //if Selected  = false
+        //{
             Selected = true
             sprite_index = SpriteSl
             global.Groups[0,0] += 1
             MyNumber = global.Groups[0,0]
             global.Groups[0,MyNumber] = id
-        }
-        else
-        {
-            Selected = false
-            sprite_index = MySprite
-        }
+        //}
+        //else
+        //{
+        //    Selected = false
+        //    sprite_index = MySprite
+        //}
     }
     else if SelectAction = 2 //L-Click+Drag  = Check if in selection box, and add to group.
     {
@@ -124,8 +127,17 @@ if SelectAction &gt; 0 //Perform Selection Actions
             global.Groups[0,MyNumber] = noone
         }
     }
-    else if SelectAction = 4 //R-Click       = Replace the attack group with this unit.
-    {}
+    else if SelectAction = 4 //Ctrl+L+Drag   = Add to group if in selection box.
+    {
+        if scr_Within_SelectionBox(x,y,32,32)
+        {
+            Selected = true
+            sprite_index = SpriteSl
+            global.Groups[0,0] += 1
+            MyNumber = global.Groups[0,0]
+            global.Groups[0,MyNumber] = id
+        }
+    }
     else if SelectAction = 5 //R-Click+Drag  = Add this unit to the attack group.
     {}
     else if SelectAction = 6 //L-Click Ground= Delselect unit.
@@ -138,32 +150,19 @@ if SelectAction &gt; 0 //Perform Selection Actions
 
 
 
-TempX = x
-TempY = y
-if (MoveX &gt;= x + sprite_width + 11 or MoveX &lt;= x - 11) or (MoveY &gt;= y + sprite_height + 16 or MoveY &lt;= y - 16)
+if (MoveX &gt;= x + sprite_width + (6*TargetNumber) or MoveX &lt;= x - (6*TargetNumber)) or (MoveY &gt;= y + sprite_height + (8*TargetNumber) or MoveY &lt;= y - (8*TargetNumber)) and TargetReached = false
 {
-    
-    mp_potential_step_object(MoveX, MoveY, 5, P_Obstacles)
-    
-    /*
-    for (i=0;i&lt;=4;i+=1)
+    //mp_potential_step_object(MoveX, MoveY, 5, P_Obstacles)
+    if not mp_potential_step_object(MoveX, MoveY, 5, P_Obstacles)
     {
-        if TempX &lt; MoveX        {TempX += 1}
-        else if TempX &gt; MoveX   {TempX -= 1}
-        
-        if TempY &lt; MoveY        {TempY += 1}
-        else if TempY &gt; MoveY   {TempY -= 1}
+        TargetReached = true
+        for (i=1;i&lt;=global.Groups[MyGroup,0];i+=1)
+        {
+            ID = global.Groups[MyGroup,i]
+            if ID.TargetReached = false {ID.TargetNumber += 1}
+        }
     }
-    */
 }
-
-/*
-if place_meeting(TempX,TempY,P_All_Units)
-{
-    x = TempX
-    y = TempY
-}
-*/
 </string>
           </argument>
         </arguments>
