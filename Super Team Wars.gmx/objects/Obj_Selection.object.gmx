@@ -143,7 +143,7 @@ if mouse_check_button_pressed(mb_left)
     
     if not keyboard_check(vk_control)
     {
-        global.Groups[0,0] = 0
+        global.Groups[0,0] = 1
         SelectedGroup = 0
     }
     
@@ -183,22 +183,33 @@ if mouse_check_button_released(mb_left)
             {
                 with(P_All_Units)
                 {
-                    SelectAction = 6
+                    scr_Selection(id,6)
+                    //SelectAction = 6
                 }
-                ID.SelectAction = 1
+                scr_Selection(ID,1)
+                //ID.SelectAction = 1
             }
             else
             {
-                ID.SelectAction = 3
+                scr_Selection(ID,3)
+                //ID.SelectAction = 3
             }
         }
-        else {with(P_All_Units) {SelectAction = 6}}
+        else {with(P_All_Units)
+        {
+            scr_Selection(id,6)
+            //SelectAction = 6
+        }}
     }
     else
     {
         if keyboard_check(vk_control)
         {
-            with(P_All_Units) {SelectAction = 4}
+            with(P_All_Units)
+            {
+                scr_Selection(id,4)
+                //SelectAction = 4
+            }
             /*for (i=1;i&lt;=global.Groups[0,0];i+=1)
             {
                 ID = global.Groups[0,0]
@@ -209,7 +220,11 @@ if mouse_check_button_released(mb_left)
         else
         {
             global.Group[0,0] = 0
-            with(P_All_Units) {SelectAction = 2}
+            with(P_All_Units)
+            {
+                scr_Selection(id,2)
+                //SelectAction = 2
+            }
         }
     }
     

@@ -28,6 +28,7 @@
     <script>scripts\Scr_ObjectHide.gml</script>
     <script>scripts\Notes.gml</script>
     <script>scripts\scr_Within_SelectionBox.gml</script>
+    <script>scripts\scr_Selection.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\Obj_Temp_Building</object>
@@ -47,7 +48,7 @@
       <object>objects\P_Terrain</object>
       <object>objects\P_Obstacles</object>
     </objects>
-    <object>objects\object11</object>
+    <object>objects\Obj_Formation_Controller</object>
     <object>objects\Obj_PathFinding_Controller</object>
   </objects>
   <rooms name="rooms">

@@ -47,6 +47,9 @@ MoveX = x
 MoveY = y
 TargetNumber = 0
 TargetReached = false
+moveCounter = 0
+pastX = x
+pastY = y
 
 notMoving = 0
 
@@ -75,6 +78,7 @@ Path = path_add()
           <argument>
             <kind>1</kind>
             <string>if !(global.on_gui)
+/*
 if SelectAction &gt; 0 //Perform Selection Actions
 {
     if SelectAction = 1 //L-Click       = Become selected as individual or just add to group.
@@ -147,7 +151,7 @@ if SelectAction &gt; 0 //Perform Selection Actions
     }
     SelectAction = 0
 }
-
+*/
 
 
 if (MoveX &gt;= x + sprite_width + (6*TargetNumber) or MoveX &lt;= x - (6*TargetNumber)) or (MoveY &gt;= y + sprite_height + (8*TargetNumber) or MoveY &lt;= y - (8*TargetNumber)) and TargetReached = false
@@ -162,7 +166,19 @@ if (MoveX &gt;= x + sprite_width + (6*TargetNumber) or MoveX &lt;= x - (6*Target
             if ID.TargetReached = false {ID.TargetNumber += 1}
         }
     }
+    moveCounter += 1
+    if moveCounter = 10
+    {
+        moveCounter = 0
+        if (pastX &lt; x+20 or pastX &gt; x-20) or (pastY &lt; y+20 or pastY &gt; y-20)
+        {
+            TargetReached = true
+        }
+        pastX = x
+        pastY = y
+    }
 }
+else {moveCounter = 0}
 </string>
           </argument>
         </arguments>
