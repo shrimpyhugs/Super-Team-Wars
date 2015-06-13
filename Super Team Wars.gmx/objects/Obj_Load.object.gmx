@@ -72,6 +72,46 @@ global.gui_mouse_y = (mouse_y - view_xview[ view_current] * global.display_scale
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///WORLD LOADING CODE
+
+WorldFile = file_text_open_read("level.txt") //loads the world file
+
+//*************LOAD FROM FILE*******************//
+    for(i = 0; i &lt; 10; i += 1) {  //for the X coord
+        for(j = 0; j &lt; 10; j += 1) { //for the Y coord
+           TileArray[i,j] = file_text_read_real(WorldFile); //set the data into the array
+       }
+    }
+    file_text_close(WorldFile); //close the file
+//************************************************//
+
+//**********PLACE THE TILES*****************//
+    for(l = 0; l &lt; 10; l += 1) {  //for the Y coord
+       for(k = 0; k &lt; 10; k += 1) { //for the X coord
+           tile_add(Bck_FloorTiles,(TileArray[k,l] * 64), 0, 64, 32,(k * 64 - l * 32),(k * 64 + l * 32)/2, 100);
+       }
+    }
+//*******************************************//
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="2">
       <action>
